@@ -10,6 +10,18 @@ namespace Prueba_Repositorios
     {
         static void Main(string[] args)
         {
+            int a;
+            Console.WriteLine("Digite un numero");
+            a= int.Parse(Console.ReadLine());
+            if (a % 2 == 0)
+            {
+                Console.WriteLine("es par");
+            }
+            else
+            {
+                Console.WriteLine("no es par");
+            }
+
         }
     }
 }
