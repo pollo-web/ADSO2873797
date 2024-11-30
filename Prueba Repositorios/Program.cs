@@ -22,6 +22,10 @@ namespace Prueba_Repositorios
                 Console.WriteLine("no es par");
             }
 
+            Console.WriteLine("Digite otro numero");
+            int b = int.Parse(Console.ReadLine());
+            int c = a + b;
+            Console.WriteLine(c);
         }
     }
 }
