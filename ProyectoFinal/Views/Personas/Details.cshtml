@@ -1,0 +1,145 @@
+﻿@model ProyectoFinal.Models.Personas
+
+@{
+    ViewBag.Title = "Detalles de Identidad";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background-color: #1E1E2C;
+        color: #EAEAEA;
+        font-family: 'Roboto', 'Arial', sans-serif;
+    }
+
+    .details-container {
+        background-color: #252836;
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .details-header {
+        text-align: center;
+        color: #FFD369;
+        font-size: 1.8em;
+        font-weight: bold;
+        border-bottom: 2px solid #3B3B4F;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+    }
+
+    .dl-horizontal dt {
+        font-weight: bold;
+        color: #D84B6A;
+        margin-bottom: 10px;
+    }
+
+    .dl-horizontal dd {
+        color: #EAEAEA;
+        margin-bottom: 20px;
+    }
+
+    .form-actions {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .btn-edit {
+        background-color: #FFD369;
+        border: none;
+        color: #252836;
+        padding: 10px 20px;
+        border-radius: 6px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        font-size: 0.9em;
+    }
+
+        .btn-edit:hover {
+            background-color: #D84B6A;
+            color: #EAEAEA;
+            transform: scale(1.05);
+        }
+
+    .btn-back {
+        color: #A6A6A6;
+        text-decoration: none;
+        margin-left: 20px;
+        font-weight: bold;
+        transition: color 0.3s ease;
+        font-size: 0.9em;
+    }
+
+        .btn-back:hover {
+            color: #FFD369;
+        }
+</style>
+
+<div class="details-container">
+    <h1 class="details-header">Detalles de Identidad</h1>
+
+    <div>
+        <h4 class="text-center">Información de la Persona</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nombres)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nombres)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Apellidos)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Apellidos)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NumeroIdentificacion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NumeroIdentificacion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TipoIdentificacion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TipoIdentificacion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaCreacion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FechaCreacion)
+            </dd>
+        </dl>
+
+        <div class="form-actions">
+            @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn-edit" })
+            @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "btn-back" })
+        </div>
+    </div>
+</div>
+

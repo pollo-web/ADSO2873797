@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Contact SecureShield Solutions";
+}
+
+<style>
+    body {
+        background-color: #1E1E2C;
+        color: #EAEAEA;
+        font-family: 'Roboto', 'Arial', sans-serif;
+    }
+
+    main {
+        background-color: #252836;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    #title {
+        color: #D84B6A;
+        border-bottom: 2px solid #3B3B4F;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    h3 {
+        color: #A6A6A6;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+    address {
+        color: #EAEAEA;
+        font-style: normal;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+        address a {
+            color: #FFD369;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+            address a:hover {
+                color: #D84B6A;
+                text-decoration: underline;
+            }
+
+    .contact-info {
+        background-color: #3B3B4F;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+</style>
+
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title</h2>
+    <h3>@(ViewBag.Message ?? "Secure Communication Channels")</h3>
+
+    <div class="contact-info">
+        <address>
+            <strong>Headquarters:</strong><br />
+            SecureShield Cybersecurity Center<br />
+            1337 Encryption Lane<br />
+            Silicon Valley, CA 94000<br />
+            <abbr title="Phone">P:</abbr> +1 (888) SECURE-0
+        </address>
+
+        <address>
+            <strong>Support:</strong>
+            <a href="mailto:support@secureshield.com">support@secureshield.com</a><br />
+            <strong>Sales & Inquiries:</strong>
+            <a href="mailto:contact@secureshield.com">contact@secureshield.com</a>
+        </address>
+    </div>
+</main>

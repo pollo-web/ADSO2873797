@@ -1,0 +1,150 @@
+﻿@model ProyectoFinal.Models.Personas
+
+@{
+    ViewBag.Title = "Editar Identidad";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background-color: #1E1E2C;
+        color: #EAEAEA;
+        font-family: 'Roboto', 'Arial', sans-serif;
+    }
+
+    .edit-container {
+        background-color: #252836;
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .edit-header {
+        text-align: center;
+        color: #FFD369;
+        font-size: 1.8em;
+        font-weight: bold;
+        border-bottom: 2px solid #3B3B4F;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+    }
+
+    .form-group label {
+        color: #FFD369;
+        font-weight: bold;
+    }
+
+    .form-control {
+        background-color: #1E1E2C;
+        color: #EAEAEA;
+        border: 1px solid #3B3B4F;
+        border-radius: 6px;
+    }
+
+        .form-control:focus {
+            border-color: #FFD369;
+            box-shadow: 0 0 8px #FFD369;
+        }
+
+    .text-danger {
+        color: #D84B6A;
+    }
+
+    .form-actions {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .btn-save {
+        background-color: #FFD369;
+        border: none;
+        color: #252836;
+        padding: 10px 20px;
+        border-radius: 6px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        font-size: 0.9em;
+    }
+
+        .btn-save:hover {
+            background-color: #D84B6A;
+            color: #EAEAEA;
+            transform: scale(1.05);
+        }
+
+    .btn-back {
+        color: #A6A6A6;
+        text-decoration: none;
+        margin-left: 20px;
+        font-weight: bold;
+        transition: color 0.3s ease;
+        font-size: 0.9em;
+    }
+
+        .btn-back:hover {
+            color: #FFD369;
+        }
+</style>
+
+<div class="edit-container">
+    <h1 class="edit-header">Editar Identidad</h1>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nombres, new { @class = "control-label" })
+                @Html.EditorFor(model => model.Nombres, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nombres, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Apellidos, new { @class = "control-label" })
+                @Html.EditorFor(model => model.Apellidos, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Apellidos, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NumeroIdentificacion, new { @class = "control-label" })
+                @Html.EditorFor(model => model.NumeroIdentificacion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NumeroIdentificacion, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TipoIdentificacion, new { @class = "control-label" })
+                @Html.EditorFor(model => model.TipoIdentificacion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TipoIdentificacion, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FechaCreacion, new { @class = "control-label" })
+                @Html.EditorFor(model => model.FechaCreacion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FechaCreacion, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-actions">
+                <input type="submit" value="Guardar" class="btn-save" />
+                @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "btn-back" })
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

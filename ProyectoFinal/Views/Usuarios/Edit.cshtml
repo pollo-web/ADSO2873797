@@ -1,0 +1,148 @@
+﻿@model ProyectoFinal.Models.Usuarios
+
+@{
+    ViewBag.Title = "Editar Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background-color: #1E1E2C;
+        color: #EAEAEA;
+        font-family: 'Roboto', 'Arial', sans-serif;
+    }
+
+    .dashboard-container {
+        background-color: #252836;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .dashboard-header {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #D84B6A;
+        border-bottom: 2px solid #3B3B4F;
+        padding-bottom: 15px;
+    }
+
+    .form-horizontal {
+        background-color: #3B3B4F;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+        .form-horizontal h4 {
+            color: #FFD369;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-horizontal hr {
+            border: 1px solid #D6C0B3;
+            margin-bottom: 20px;
+        }
+
+    .form-group label {
+        color: #EAEAEA;
+    }
+
+    .form-control {
+        background-color: #252836;
+        color: #EAEAEA;
+        border: 1px solid #FFD369;
+        border-radius: 4px;
+    }
+
+    .btn-management {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .btn-submit {
+        background-color: #D84B6A;
+        color: #EAEAEA;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+    }
+
+        .btn-submit:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(216, 75, 106, 0.3);
+        }
+
+    .btn-back {
+        background-color: #3B3B4F;
+        color: #EAEAEA;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+    }
+
+        .btn-back:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 211, 105, 0.3);
+        }
+</style>
+
+<div class="dashboard-container">
+    <h1 class="dashboard-header">Editar Usuario</h1>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Actualizar Información</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Usuario, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.Usuario, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Usuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Pass, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.Pass, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Pass, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FechaCreacion, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.FechaCreacion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FechaCreacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="btn-management">
+                <input type="submit" value="Guardar" class="btn-submit" />
+                @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn-back" })
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

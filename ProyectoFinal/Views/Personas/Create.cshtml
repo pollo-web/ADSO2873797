@@ -1,0 +1,169 @@
+﻿@model ProyectoFinal.Models.Personas
+@{
+    ViewBag.Title = "Crear Nueva Identidad";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background-color: #1E1E2C;
+        color: #EAEAEA;
+        font-family: 'Roboto', 'Arial', sans-serif;
+    }
+
+    .persona-creation-container {
+        background-color: #252836;
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .form-header {
+        text-align: center;
+        color: #D84B6A;
+        border-bottom: 2px solid #3B3B4F;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .control-label {
+        color: #A6A6A6;
+        margin-bottom: 5px;
+        font-weight: 500;
+    }
+
+    .form-control {
+        background-color: #3B3B4F;
+        border: 1px solid #3B3B4F;
+        color: #EAEAEA;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+
+        .form-control:focus {
+            background-color: #3B3B4F;
+            border-color: #D84B6A;
+            box-shadow: 0 0 0 0.2rem rgba(216, 75, 106, 0.25);
+        }
+
+    .text-danger {
+        color: #D84B6A !important;
+        font-size: 0.8em;
+        margin-top: 5px;
+    }
+
+    .btn-create {
+        background-color: #D84B6A;
+        border: none;
+        color: #EAEAEA;
+        padding: 10px 20px;
+        border-radius: 6px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-create:hover {
+            background-color: #FFD369;
+            color: #252836;
+            transform: scale(1.05);
+        }
+
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        color: #A6A6A6;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .back-link:hover {
+            color: #FFD369;
+        }
+</style>
+
+<div class="persona-creation-container">
+    <h2 class="form-header">Registro de Nueva Identidad</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4 class="text-center text-info mb-4">Información Personal para Validación de Identidad</h4>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nombres, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.Nombres, new { htmlAttributes = new { @class = "form-control", placeholder = "Ingrese nombres completos" } })
+                    @Html.ValidationMessageFor(model => model.Nombres, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Apellidos, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.Apellidos, new { htmlAttributes = new { @class = "form-control", placeholder = "Ingrese apellidos completos" } })
+                    @Html.ValidationMessageFor(model => model.Apellidos, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NumeroIdentificacion, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.NumeroIdentificacion, new { htmlAttributes = new { @class = "form-control", placeholder = "Número de identificación" } })
+                    @Html.ValidationMessageFor(model => model.NumeroIdentificacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TipoIdentificacion, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.DropDownListFor(model => model.TipoIdentificacion,
+                        new List<SelectListItem> {
+                            new SelectListItem { Text = "Cédula de Ciudadanía", Value = "CC" },
+                            new SelectListItem { Text = "Pasaporte", Value = "PP" },
+                            new SelectListItem { Text = "Tarjeta de Identidad", Value = "TI" }
+                        },
+                        "Seleccione tipo de identificación",
+                        new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "correo@ejemplo.com", type = "email" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FechaCreacion, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.FechaCreacion, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                    @Html.ValidationMessageFor(model => model.FechaCreacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group text-center">
+                <input type="submit" value="Crear Identidad" class="btn btn-create" />
+            </div>
+        </div>
+    }
+
+    @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "back-link" })
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
