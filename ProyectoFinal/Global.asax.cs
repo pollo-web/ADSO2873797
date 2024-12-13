@@ -16,6 +16,23 @@ namespace ProyectoFinal
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+        }
+        protected void Application_AuthenticateRequest(object sender, EventArgs e)
+        {
+            if (HttpContext.Current.User != null && HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                return;
+            }
+            else
+            {
+                string currentUrl = HttpContext.Current.Request.Url.AbsolutePath.ToLower();
+
+                if (!currentUrl.Contains("login"))
+                {
+                    Response.Redirect("~/Home/Login");
+                }
+            }
         }
     }
 }

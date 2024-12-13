@@ -15,9 +15,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Usuario)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Pass)
-        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.FechaCreacion)
         </th>
@@ -29,9 +27,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Usuario)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pass)
-        </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.FechaCreacion)
         </td>
@@ -44,3 +40,7 @@
 }
 
 </table>
+<div class="btn-group" role="group">
+    <!-- Botón para Usuarios -->
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Volver al menu</a>
+</div>

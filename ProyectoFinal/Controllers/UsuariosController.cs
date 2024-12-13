@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using ProyectoFinal.Context;
 using ProyectoFinal.Models;
+using ProyectoFinal.Security;
 
 namespace ProyectoFinal.Controllers
 {
     public class UsuariosController : Controller
     {
         private ProyectoFinalContext db = new ProyectoFinalContext();
+        private readonly IPasswordEncripter _passwordEncripter = new PasswordEncripter();
 
         // GET: Usuarios
         public ActionResult Index()
@@ -47,15 +51,33 @@ namespace ProyectoFinal.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Usuario,Pass,FechaCreacion")] Usuarios usuarios)
+        public ActionResult Create([Bind(Include = "Id,Usuario,Pass,FechaCreacion,HashIV,HashKey")] Usuarios usuarios)
         {
-            if (ModelState.IsValid)
-            {
-                db.Usuarios.Add(usuarios);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var hash = new List<byte[]>();
+                    var encriptedPassword = this._passwordEncripter.Encript(usuarios.Pass, out hash);
+                    var newUser = new Usuarios
+                    {
+                        Usuario = usuarios.Usuario,
+                        Pass = encriptedPassword,
+                        HashKey = hash[0],
+                        HashIV = hash[1],
+                        FechaCreacion = DateTime.Now
+                    };
+                    
+                    db.Usuarios.Add(newUser);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index", new { message = "Ocurrió un error registrando la información del usuario: \" + ex.ToString()", isError = true });
+            }
             return View(usuarios);
         }
 
@@ -79,7 +101,7 @@ namespace ProyectoFinal.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Usuario,Pass,FechaCreacion")] Usuarios usuarios)
+        public ActionResult Edit([Bind(Include = "Id,Usuario,Pass,FechaCreacion,HashIV,HashKey")] Usuarios usuarios)
         {
             if (ModelState.IsValid)
             {

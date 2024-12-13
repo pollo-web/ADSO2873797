@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace ProyectoFinal.Models
 {
-    public class Usuarios
+    public class Login
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Autoincremental
@@ -20,14 +20,5 @@ namespace ProyectoFinal.Models
         [Required(ErrorMessage = "La contraseña es obligatoris")]
         [StringLength(50, ErrorMessage = "La contraseña no puede exeder el limite de caracteres")]
         public string Pass { get; set; }
-
-        [Required(ErrorMessage = "La fecha de creación es obligatoria")]
-        public DateTime FechaCreacion { get; set; }
-
-        
-        public byte[] HashIV { get; set; }
-       
-        public byte[] HashKey { get; set; }
     }
-
 }

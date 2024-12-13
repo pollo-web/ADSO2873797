@@ -20,9 +20,9 @@ namespace ProyectoFinal.Context
             protected override void OnModelCreating(DbModelBuilder modelBuilder)
             {
             // Configuración de la entidad Usuarios
-            modelBuilder.Entity<Usuarios>()
-               .ToTable("Usuarios")
-               .HasKey(p => p.Id);
+                modelBuilder.Entity<Usuarios>()
+                    .ToTable("Usuarios")
+                    .HasKey(p => p.Id);
 
                 modelBuilder.Entity<Usuarios>()
                     .Property(u => u.Id)
@@ -45,9 +45,18 @@ namespace ProyectoFinal.Context
                     .Property(u => u.FechaCreacion)
                     .IsRequired()
                     .HasColumnName("FechaCreacion");
+                modelBuilder.Entity<Usuarios>()
+                    .Property(u => u.HashKey)
+                    .IsRequired()
+                    .HasColumnName("HashKey");
 
-                // Configuración de la entidad Personas
-                modelBuilder.Entity<Personas>()
+                modelBuilder.Entity<Usuarios>()
+                    .Property(u => u.HashIV)
+                    .IsRequired()
+                    .HasColumnName("HashIV");
+
+            // Configuración de la entidad Personas
+            modelBuilder.Entity<Personas>()
                     .ToTable("Personas")
                     .HasKey(p => p.Id);
 
