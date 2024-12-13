@@ -1,9 +1,57 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "About SecureShield Solutions";
 }
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
 
-    <p>Use this area to provide additional information.</p>
+<style>
+    body {
+        background-color: #1E1E2C;
+        color: #EAEAEA;
+        font-family: 'Roboto', 'Arial', sans-serif;
+    }
+
+    main {
+        background-color: #252836;
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    #title {
+        color: #D84B6A;
+        border-bottom: 2px solid #3B3B4F;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    h3 {
+        color: #A6A6A6;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+    p {
+        color: #EAEAEA;
+        line-height: 1.6;
+        text-align: justify;
+    }
+</style>
+
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title</h2>
+    <h3>@(ViewBag.Message ?? "Defending Your Digital Frontier")</h3>
+    <p>
+        At SecureShield Solutions, we are at the forefront of cybersecurity innovation,
+        providing cutting-edge protection for businesses in an increasingly complex digital landscape.
+        Our team of expert security professionals develops advanced threat detection,
+        prevention, and response strategies tailored to safeguard your most critical digital assets.
+    </p>
+    <p>
+        We combine state-of-the-art technology, deep technical expertise, and proactive threat intelligence
+        to deliver comprehensive security solutions that adapt to the evolving threat environment.
+        From network defense and endpoint protection to advanced threat hunting and incident response,
+        SecureShield is your trusted partner in maintaining digital resilience.
+    </p>
 </main>

@@ -1,28 +1,98 @@
 ﻿@model ProyectoFinal.Models.Usuarios
 
-<form class="px-4 py-3" action="@Url.Action("Login","Home")" method="post">
-    @Html.AntiForgeryToken()
+<style>
+    body {
+        background-color: #1E1E2C;
+        color: #EAEAEA;
+        font-family: 'Arial', sans-serif;
+    }
 
-    <div class="mb-3">
-        @Html.LabelFor(m => m.Usuario, new { @class = "form-label" })
-        @Html.TextBoxFor(m => m.Usuario, new { @class = "form-control", @placeholder = "correo@ejemplo.com" })
-        @Html.ValidationMessageFor(m => m.Usuario, "", new { @class = "text-danger" })
-    </div>
-    <div class="mb-3">
-        @Html.LabelFor(m => m.Pass, new { @class = "form-label" })
-        @Html.TextBoxFor(m => m.Pass, new { @class = "form-control", @placeholder = "Contraseña" })
-        @Html.ValidationMessageFor(m => m.Pass, "", new { @class = "text-danger" })
-    </div>
-    <br />
-    <button type="submit" class="btn btn-info">Iniciar Sesión</button>
-</form>
-@if (TempData["AlertMessage"] != null)
-{
-    <div class="alert alert-danger mt-3">
-        <strong>Atención!</strong>
-        <br />
-        @TempData["AlertMessage"]
-    </div>
-}
-<div class="dropdown-divider"></div>
-<a class="dropdown-item" href="@Url.Action("Create", "Usuarios")">No tienes cuenta? Registrate </a>
+    .login-container {
+        background-color: #252836;
+        border-radius: 12px;
+        padding: 30px;
+        max-width: 400px;
+        margin: 50px auto;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .form-label {
+        color: #A6A6A6;
+        font-weight: 500;
+    }
+
+    .form-control {
+        background-color: #3B3B4F;
+        border: 1px solid #3B3B4F;
+        color: #EAEAEA;
+    }
+
+        .form-control:focus {
+            background-color: #3B3B4F;
+            border-color: #D84B6A;
+            box-shadow: 0 0 0 0.2rem rgba(216, 75, 106, 0.25);
+            color: #EAEAEA;
+        }
+
+    .btn-info {
+        background-color: #D84B6A;
+        border-color: #D84B6A;
+        color: #EAEAEA;
+        transition: all 0.3s ease;
+    }
+
+        .btn-info:hover {
+            background-color: #FFD369;
+            border-color: #FFD369;
+            color: #252836;
+        }
+
+    .dropdown-divider {
+        border-top: 1px solid #3B3B4F;
+    }
+
+    .dropdown-item {
+        color: #A6A6A6;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .dropdown-item:hover {
+            color: #FFD369;
+        }
+
+    .alert-danger {
+        background-color: #3B3B4F;
+        border-color: #D84B6A;
+        color: #EAEAEA;
+    }
+</style>
+
+<div class="login-container">
+    <form class="px-4 py-3" action="@Url.Action("Login","Home")" method="post">
+        @Html.AntiForgeryToken()
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Usuario, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.Usuario, new { @class = "form-control", @placeholder = "correo@ejemplo.com" })
+            @Html.ValidationMessageFor(m => m.Usuario, "", new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Pass, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.Pass, new { @type = "password", @class = "form-control", @placeholder = "Contraseña" })
+            @Html.ValidationMessageFor(m => m.Pass, "", new { @class = "text-danger" })
+        </div>
+        <button type="submit" class="btn btn-info w-100 mt-3">Iniciar Sesión</button>
+    </form>
+
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div class="alert alert-danger mt-3">
+            <strong>Atención!</strong>
+            <br />
+            @TempData["AlertMessage"]
+        </div>
+    }
+
+    <div class="dropdown-divider my-3"></div>
+    
+</div>

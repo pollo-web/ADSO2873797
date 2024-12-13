@@ -1,43 +1,122 @@
 ﻿@model ProyectoFinal.Models.Usuarios
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles del Usuario";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<style>
+    body {
+        background-color: #1E1E2C;
+        color: #EAEAEA;
+        font-family: 'Roboto', 'Arial', sans-serif;
+    }
 
-<div>
-    <h4>Usuarios</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Usuario)
-        </dt>
+    .dashboard-container {
+        background-color: #252836;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Usuario)
-        </dd>
+    .dashboard-header {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #D84B6A;
+        border-bottom: 2px solid #3B3B4F;
+        padding-bottom: 15px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Pass)
-        </dt>
+    .details-section {
+        background-color: #3B3B4F;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Pass)
-        </dd>
+        .details-section h4 {
+            color: #FFD369;
+            margin-bottom: 20px;
+            text-align: center;
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaCreacion)
-        </dt>
+        .details-section dl {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.FechaCreacion)
-        </dd>
+        .details-section dt {
+            color: #EAEAEA;
+            font-weight: bold;
+        }
 
-    </dl>
+        .details-section dd {
+            color: #FFD369;
+            margin: 0;
+        }
+
+    .btn-management {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .btn-edit {
+        background-color: #D84B6A;
+        color: #EAEAEA;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+    }
+
+        .btn-edit:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(216, 75, 106, 0.3);
+        }
+
+    .btn-back {
+        background-color: #3B3B4F;
+        color: #EAEAEA;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+    }
+
+        .btn-back:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 211, 105, 0.3);
+        }
+</style>
+
+<div class="dashboard-container">
+    <h1 class="dashboard-header">Detalles del Usuario</h1>
+
+    <div class="details-section">
+        <h4>Información del Usuario</h4>
+        <dl>
+            <dt>Usuario</dt>
+            <dd>@Html.DisplayFor(model => model.Usuario)</dd>
+
+            <dt>Contraseña</dt>
+            <dd>@Html.DisplayFor(model => model.Pass)</dd>
+
+            <dt>Fecha de Creación</dt>
+            <dd>@Html.DisplayFor(model => model.FechaCreacion)</dd>
+        </dl>
+    </div>
+
+    <div class="btn-management">
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn-edit" })
+        @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn-back" })
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

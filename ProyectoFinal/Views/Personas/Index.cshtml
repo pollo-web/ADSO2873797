@@ -1,68 +1,170 @@
 ﻿@model IEnumerable<ProyectoFinal.Models.Personas>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista de Personas";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<style>
+    body {
+        background-color: #1E1E2C;
+        color: #EAEAEA;
+        font-family: 'Roboto', 'Arial', sans-serif;
+    }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombres)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Apellidos)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumeroIdentificacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TipoIdentificacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaCreacion)
-        </th>
-        <th></th>
-    </tr>
+    .dashboard-container {
+        background-color: #252836;
+        max-width: 94%;
+        margin: 40px auto;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombres)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Apellidos)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumeroIdentificacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoIdentificacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaCreacion)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    .dashboard-header {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #D84B6A;
+        font-size: 1.8em;
+        font-weight: bold;
+        border-bottom: 2px solid #3B3B4F;
+        padding-bottom: 15px;
+    }
 
-</table>
-<div class="btn-group" role="group">
-    <!-- Botón para Usuarios -->
-    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Volver al menu</a>
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 1em;
+        text-align: left;
+    }
+
+        .table th, .table td {
+            padding: 15px 20px;
+            border: 1px solid #3B3B4F;
+        }
+
+        .table th {
+            background-color: #3B3B4F;
+            color: #FFD369;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        .table td {
+            background-color: #252836;
+            color: #EAEAEA;
+        }
+
+        .table a {
+            color: #D84B6A;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+            .table a:hover {
+                color: #FFD369;
+            }
+
+    .btn-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+    }
+
+    .btn-create {
+        background-color: #D84B6A;
+        color: #EAEAEA;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 0.9em;
+    }
+
+        .btn-create:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(216, 75, 106, 0.3);
+        }
+
+    .btn-back {
+        margin-top: 20px;
+        display: inline-block;
+        background-color: #3B3B4F;
+        color: #EAEAEA;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 0.9em;
+    }
+
+        .btn-back:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 211, 105, 0.3);
+        }
+
+    .action-links {
+        text-align: center;
+    }
+
+        .action-links a {
+            margin: 0 5px;
+            color: #D84B6A;
+            font-size: 0.9em;
+        }
+
+            .action-links a:hover {
+                color: #FFD369;
+            }
+</style>
+
+<div class="dashboard-container">
+    <h1 class="dashboard-header">Lista de Personas</h1>
+
+    <div class="btn-container">
+        <a href="@Url.Action("Create", "Personas")" class="btn-create">Crear Nuevo</a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Nombres)</th>
+                <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Apellidos)</th>
+                <th>@Html.DisplayNameFor(model => model.FirstOrDefault().NumeroIdentificacion)</th>
+                <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Email)</th>
+                <th>@Html.DisplayNameFor(model => model.FirstOrDefault().TipoIdentificacion)</th>
+                <th>@Html.DisplayNameFor(model => model.FirstOrDefault().FechaCreacion)</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Nombres)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Apellidos)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NumeroIdentificacion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TipoIdentificacion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FechaCreacion)</td>
+                    <td class="action-links">
+                        <a href="@Url.Action("Edit", "Personas", new { id = item.Id })">Editar</a> |
+                        <a href="@Url.Action("Details", "Personas", new { id = item.Id })">Detalles</a> |
+                        <a href="@Url.Action("Delete", "Personas", new { id = item.Id })">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a href="@Url.Action("Index", "Home")" class="btn-back">Volver al Menú</a>
 </div>
+    
